@@ -1,0 +1,10 @@
+CREATE TABLE gares (
+	uic CHAR(10) PRIMARY KEY NOT NULL,
+	departement CHAR(100) NOT NULL,
+	intitule CHAR(200) NOT NULL,
+	region CHAR(100) NOT NULL,
+	commune CHAR(200) NOT NULL,
+	latitude NUMERIC(10,7) NOT NULL,
+	longitude NUMERIC(10,7) NOT NULL
+)
+	
