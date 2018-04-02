@@ -1,11 +1,11 @@
 #!bin/bash
-#check gares.io pour doc
+
 random=$(pwgen 20 1)
-output_head="output_"
+output_head="outputgaresbreizh_"
 output_tail=".json"
-filename=$output_head$random$output_tail
 
-$(curl -u f4d7c70e-074a-4866-afae-f63e4116e3d5: https://api.sncf.com/v1/coverage/sncf/stop_areas/stop_area:OCE:SA:87447003/departures > $filename)
 
-echo "fichier json crée : "$filename
 
+$(curl -X GET --header 'Accept: application/json' 'https://data.sncf.com/api/records/1.0/search/?dataset=referentiel-gares-voyageurs&q=REGION%20BRETAGNE&sort=region_sncf&facet=segment_drg&pretty=true' > $output_head$random$output_tail)
+
+echo $output_head$random$output_tail

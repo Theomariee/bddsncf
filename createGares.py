@@ -1,6 +1,7 @@
 #!/usr/bin/python3.4
-import psycopg2, json
+import psycopg2, json 
 from config import config 
+from prepare import PreparingCursor
 
 def createGares():
     """ Create and fill "gares" table to the PostgreSQL database server """
@@ -23,7 +24,7 @@ def createGares():
 	region CHAR(100) NOT NULL,
 	commune CHAR(200) NOT NULL,
 	latitude NUMERIC(10,7) NOT NULL,
-	longitude NUMERIC(10,7) NOT NULL""")
+	longitude NUMERIC(10,7) NOT NULL)""")
         cur.close()
 	
 
@@ -32,7 +33,9 @@ def createGares():
         #execute statement
         cur.prepare("INSERT INTO gares (uic, departement, intitule, region, commune, latitude, longitude) VALUES (%s,%s,%s,%s,%s,%s,%s)")
         with open('output/outputgares.json', 'r') as f:
-        data = json.load(f)
+            data = json.load(f)
+	    print(data)
+	    type(data)
         for rec in data :
             uic = rec.get("uic")
             departement = rec.get("departement")
@@ -41,7 +44,7 @@ def createGares():
             commune = rec.get("commune")
             latitude = rec.get("latitude_wgs84")
             longitude = rec.get("longitude_wgs84")
-            print(uic, departement, intitule, region, commune, latitude, longitude, sep=', ')
+            print(uic, departement, intitule, region, commune, latitude, longitude)
             #cur.execute((uic, departement, intitule, region, commune, latitude, longitude))
 
         
