@@ -1,7 +1,6 @@
 #!/usr/bin/python3.4
 import psycopg2
 from departureRequest import departureRequest
-from config import config 
 
 def connect():
     """ Connect to the PostgreSQL database server """
@@ -17,15 +16,15 @@ def connect():
         cur = conn.cursor()
         
  # execute a statement
-        cur.execute('SELECT * FROM gares;')
- 
-        # display the PostgreSQL database server version
+	cur.execute('SELECT uic FROM gares;')
+ 	# display the PostgreSQL database server version
         gares = cur.fetchall()
+
         for gare in gares:
-			uic = gare['uic']
-			print("gare " + uic + " requested")
-			departureRequest(gare['uic'])
-			print("gare " + uic + " request done")
+		uic = gare[0]
+		print("gare " + uic + " requested")
+		departureRequest(int(uic))
+		print("gare " + uic + " request done")
        
      # close the communication with the PostgreSQL
         cur.close()
