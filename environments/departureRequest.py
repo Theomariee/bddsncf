@@ -13,7 +13,7 @@ def departureRequest( uic):
 
 	for mois in range(4,5) : #boucle des mois
 
-		for i in range(2,22) : #boucle des jours
+		for i in range(12,31) : #boucle des jours
 
 			prefixejour=0 
 			jour=i%10
@@ -32,9 +32,9 @@ def departureRequest( uic):
 				prefixemois=1
 
 
-			annee=int(datetime.now().strftime('%Y'))-1 #annee en int
+			annee=int(datetime.now().strftime('%Y')) #annee en int
 
-			heure=000000 #00h00m00s
+			heure="000000" #00h00m00s
 
 			url = "https://api.sncf.com/v1/coverage/sncf/stop_areas/stop_area:OCE:SA:"+str(uic)+"/departures?from_datetime="+str(annee)+str(prefixemois)+str(mois)+str(prefixejour)+str(jour)+"T"+str(heure)+"&count=1000"
 
