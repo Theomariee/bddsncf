@@ -25,6 +25,10 @@ for file in glob.glob("*.json"):
 		
 		#faire l'ajout à la BDD table Arrivals avec clé = stop_area_id, train_headsign, train_arrival_base_date_time
 
+		#test des infos
+		print(train_direction+" "+train_headsign+" "+train_type+" "+stop_area_id+" "+train_arrival_date_time+" "+train_base_arrival_date_time+" "+train_departure_date_time+" "+train_base_departure_date_time)
+
+
 	print('')
 
 #info : pour ajouter a SQL un JSON il faut utiliser json.dumps(data) pour transformer le json en un json string utilisable dans un text field SQL
