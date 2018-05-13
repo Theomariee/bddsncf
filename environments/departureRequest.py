@@ -55,8 +55,8 @@ def departureRequest(uic):
 	
 
 			#ecriture dans le dossier output d'un fichier json nomme : uic_jour_mois_annee_heure
-			with open('./output2/'+str(uic)+"_"+str(prefixejour)+str(jour)+"_"+str(prefixemois)+str(mois)+"_"+str(annee)+'.json','w') as f:
-				json.dump(repr(data.json()),f)
+			f=open('./output2/'+str(uic)+"_"+str(prefixejour)+str(jour)+"_"+str(prefixemois)+str(mois)+"_"+str(annee)+'.json','w')
+			f.write(repr(json.dumps(data.json()))[1:-1])
 			f.close()
 
 if __name__ == '__main__':
