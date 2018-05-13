@@ -6,22 +6,28 @@ import glob,os,json,pprint,ast
 #os.chdir("~/Documents/SNCF/environments/output")
 os.chdir("test") 
 for file in glob.glob("*.json"):
-	json_data=open(file).read()
-	data=(json.dumps(json_data))
-	#print(json_data)
+	with open(file,'r') as json_data:
+		temp=(json_data.read())
+		print(temp[47064])
+		data=json.loads(temp.replace("\\",""))
+	print(data)
 	#print(str(data['departures']))
 
-	print(data)
+	#print(data)
+	#print(type(data))
 
-	data=ast.literal_eval(data)
-	
+	#data=ast.literal_eval(json_data)
+	#print(type(data))	
+
+	#print(data)
+
 	for i in range(0, len(data['departures'])):
 		train_direction=data['departures'][i]['display_informations']['direction'] 
 		train_headsign=data['departures'][i]['display_informations']['headsign'] #nom du train
 		
 		train_type=data['departures'][i]['stop_point']['physical_modes'][0]['name']
 		stop_area_id=data['departures'][i]['stop_point']['stop_area']['id'] #il faut parser en supprimant les lettres de 0 a 16 inclues, pour 9 lettres car c'est un ID
-		stop_area_id=stop_area_id[17,27]
+		stop_area_id=stop_area_id[17:27]
 		print(stop_area_id)
 
 		train_arrival_date_time=data['departures'][i]['stop_date_time']['arrival_date_time']		
