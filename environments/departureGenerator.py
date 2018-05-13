@@ -19,13 +19,17 @@ def connect():
 	cur.execute('SELECT uic FROM gares;')
  	# display the PostgreSQL database server version
         gares = cur.fetchall()
-
+	i = 0
         for gare in gares:
-		uic = gare[0]
-		print("gare " + uic + " requested")
-		departureRequest(int(uic))
-		print("gare " + uic + " request done")
-       
+		if i < 2475 :
+			uic = gare[0]
+			print("gare " + uic + " requested")
+			departureRequest(int(uic))
+			print("gare " + uic + " request done")
+			print(i)
+			i += 11 
+		else :
+			break       
      # close the communication with the PostgreSQL
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:

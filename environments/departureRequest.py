@@ -1,9 +1,10 @@
+
 import requests,json,datetime,pprint
 from datetime import datetime
 
 #partie du script qui recupere, en fonction de son UIC, les X informations de X jours d'une gare en JSON
 #modifier les dates manuellement pour changer les jours ou l'heure de la gare, et donc acceder a de nouvelles informations
-def departureRequest( uic):
+def departureRequest(uic):
     
 
 	#uic = 87391003 #test avec gare montparnasse
@@ -11,9 +12,9 @@ def departureRequest( uic):
 
 	tabmois=[31,27,31,30,31,30,31,31,30,31,30,31] #tableau avec le nombre de jours par mois
 
-	for mois in range(4,5) : #boucle des mois
+	for mois in range(5,6) : #boucle des mois
 
-		for i in range(12,31) : #boucle des jours
+		for i in range(01,13) : #boucle des jours
 
 			prefixejour=0 
 			jour=i%10
@@ -43,7 +44,7 @@ def departureRequest( uic):
 
 			print("lancement de la requete "+url+" et ecriture")
 
-			#'3a845050-a232-4e4c-bb42-b8d0a8c085b6' #=token coco
+			#token = '3a845050-a232-4e4c-bb42-b8d0a8c085b6' #=token coco
 
 			data = requests.get(url,auth=(token,'')) #requete HTML
 
@@ -54,8 +55,8 @@ def departureRequest( uic):
 	
 
 			#ecriture dans le dossier output d'un fichier json nomme : uic_jour_mois_annee_heure
-			f=open('./output/'+str(uic)+"_"+str(prefixejour)+str(jour)+"_"+str(prefixemois)+str(mois)+"_"+str(annee)+'.json','w')
-			f.write(repr(data.json()))
+			with open('./output2/'+str(uic)+"_"+str(prefixejour)+str(jour)+"_"+str(prefixemois)+str(mois)+"_"+str(annee)+'.json','w') as f:
+				json.dump(repr(data.json()),f)
 			f.close()
 
 if __name__ == '__main__':
